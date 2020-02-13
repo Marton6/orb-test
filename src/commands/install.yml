@@ -36,6 +36,12 @@ steps:
             PLATFORM=linux
         fi
 
+        command -v secrethub >/dev/null 2>&1
+        echo $?
+
+        echo $(secrethub --version 2>&1 | sed -r 's/secrethub version v([^,]*).*/\1/')
+        echo $VERSION
+
         # If the CLI is not installed or the current version of the CLI does not match the specified one, download the provided version.
         if ! command -v secrethub >/dev/null 2>&1 || [ $(secrethub --version 2>&1 | sed -r 's/secrethub version v([^,]*).*/\1/') = "$VERSION" ]; then
             curl -sSfL https://github.com/secrethub/secrethub-cli/releases/download/v$VERSION/secrethub-v$VERSION-$PLATFORM-amd64.tar.gz | $SUDO tar zxf - -C /usr/bin
