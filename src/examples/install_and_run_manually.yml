@@ -1,0 +1,21 @@
+description: >
+  Install the SecretHub CLI and inject secrets into your app.
+  This solution manually wraps the run command of the application with secrethub run.
+
+usage:
+  version: 2.1
+
+  orbs:
+    secrethub: secrethub/secrethub-cli
+
+  jobs:
+    build:
+      steps:
+        - secrethub/install
+        - checkout
+        - run: secrethub run -- ./your-app
+
+  workflows:
+    your-workflow:
+      jobs:
+        - build

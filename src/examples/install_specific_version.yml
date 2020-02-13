@@ -1,0 +1,22 @@
+description: >
+  Install a specific version of the SecretHub CLI and inject secrets into your app.
+
+usage:
+  version: 2.1
+
+  orbs:
+    secrethub: secrethub/secrethub-cli
+
+  jobs:
+    build:
+      shell: secrethub run -- /bin/bash
+      steps:
+        - secrethub/install:
+            version: 0.33.0
+        - checkout
+        - run: ./your-app
+
+  workflows:
+    your-workflow:
+      jobs:
+        - build
