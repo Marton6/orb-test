@@ -1,6 +1,6 @@
 description: >
   Install the SecretHub CLI and inject secrets into your app.
-  This solution uses a custom shell that provides secrets to all commands running in it. 
+  This solution uses a custom shell that provides secrets to all commands running in it.
 
 usage:
   version: 2.1

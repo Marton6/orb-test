@@ -29,25 +29,25 @@ jobs:
     steps:
       - checkout
       - test-s/install
-  
+
   integration-test-alpine:
     executor: orb-tools/alpine
     steps:
       - checkout
       - test-s/install
-  
+
   integration-test-machine:
     executor: orb-tools/machine
     steps:
       - checkout
       - test-s/install
-  
+
   integration-test-node:
     executor: orb-tools/node
     steps:
       - checkout
       - test-s/install
-  
+
   integration-test-macos:
     executor: orb-tools/macos
     steps:
