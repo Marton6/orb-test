@@ -19,8 +19,6 @@ steps:
       shell: << parameters.shell >>
       command: |
 
-        if [ $(id -u) = "0" ]; then export SUDO=""; else export SUDO="sudo"; fi
-
         # If the version is not explicitly specified then use the existing one if possible.
         if [ "<< parameters.version >>" = "latest" ]  && command -v secrethub >/dev/null 2>&1; then
             exit 0
@@ -47,12 +45,12 @@ steps:
 
           # check if we can install the CLI without sudo
           if ! mv ./secrethub/bin/secrethub << parameters.install-path >> ; then
-            $SUDO mv ./secrethub/bin/secrethub << parameters.install-path >>
+            sudo mv ./secrethub/bin/secrethub << parameters.install-path >>
           fi
           rm -rf ./secrethub
 
           # Add executable to path if it is not there already.
           if ! echo ":$PATH:" | grep -q  ":<<parameters.install-path>>:"; then
-            echo `export PATH="$PATH:<<parameters.install-path>>"` >> $BASH_ENV
+            echo `export PATH="$PATH:<<parameters.install-path>>"` >> $BASH_ENV;
           fi
         fi
