@@ -43,6 +43,18 @@ steps:
         # If the CLI is not installed or the current version of the CLI does not match the specified one, download the provided version.
         if ! command -v secrethub >/dev/null 2>&1 || [ $(secrethub --version 2>&1 | sed -r 's/secrethub version v([^,]*).*/\1/') = "$VERSION" ]; then
           mkdir secrethub
-          curl -sSfL https://github.com/secrethub/secrethub-cli/releases/download/v$VERSION/secrethub-v$VERSION-$PLATFORM-amd64.tar.gz | $SUDO tar zxf - -C ./secrethub && $SUDO mv ./secrethub/bin/secrethub << parameters.install-path >>
-          $SUDO rm -rf ./secrethub
+          curl -sSfL https://github.com/secrethub/secrethub-cli/releases/download/v$VERSION/secrethub-v$VERSION-$PLATFORM-amd64.tar.gz | tar zxf - -C ./secrethub
+
+          # check if we can install the CLI without sudo
+          if ! mv ./secrethub/bin/secrethub << parameters.install-path >> ; then
+            $SUDO mv ./secrethub/bin/secrethub << parameters.install-path >>
+            $SUDO rm -rf ./secrethub
+          else
+            rm -rf ./secrethub
+          fi
+
+          # Add executable to path if it is not there already.
+          if ! echo ":$PATH:" | grep -q  ":<<parameters.install-path>>:"; then
+            echo `export PATH="$PATH:<<parameters.install-path>>"` >> $BASH_ENV
+          fi
         fi
