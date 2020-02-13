@@ -1,5 +1,5 @@
 description: >
-  Run a program with SecretHub and pass secret environment variables to it.
+  Install the SecretHub CLI.
 parameters:
   version:
     type: string
