@@ -24,11 +24,35 @@ jobs:
   #
   # Rename this job and add more as needed.
   #
-  integration-test-1:
+  integration-test-ubuntu:
     executor: orb-tools/ubuntu
     steps:
       - checkout
-    # - your-orb/your-orb-command
+      - test-s/install
+  
+  integration-test-alpine:
+    executor: orb-tools/alpine
+    steps:
+      - checkout
+      - test-s/install
+  
+  integration-test-machine:
+    executor: orb-tools/machine
+    steps:
+      - checkout
+      - test-s/install
+  
+  integration-test-node:
+    executor: orb-tools/node
+    steps:
+      - checkout
+      - test-s/install
+  
+  integration-test-macos:
+    executor: orb-tools/macos
+    steps:
+      - checkout
+      - test-s/install
 
 workflows:
   # This `lint-pack_validate_publish-dev` workflow will run on any commit.
@@ -72,7 +96,11 @@ workflows:
       # integration tests of your choosing
 
       # an example job
-      - integration-test-1
+      - integration-test-ubuntu
+      - integration-test-alpine
+      - integration-test-machine
+      - integration-test-node
+      - integration-test-macos
 
       # publish a semver version of the orb. relies on
       # the commit subject containing the text "[semver:patch|minor|major|skip]"
