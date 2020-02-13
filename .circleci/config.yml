@@ -157,7 +157,7 @@ workflows:
             - integration-test-oracle
             - integration-test-ubuntu-custom-path
             - integration-test-ubuntu-specific-version
-            
+
           filters:
             branches:
               only: master
