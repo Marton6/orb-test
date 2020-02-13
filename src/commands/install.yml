@@ -5,6 +5,10 @@ parameters:
     type: string
     default: "latest"
     description: "Version of the SecretHub CLI"
+  install-path:
+    type: string
+    default: /usr/local/bin
+    description: "Path to install SecretHub CLI to"
   shell:
     type: string
     default: /bin/sh
@@ -38,5 +42,7 @@ steps:
 
         # If the CLI is not installed or the current version of the CLI does not match the specified one, download the provided version.
         if ! command -v secrethub >/dev/null 2>&1 || [ $(secrethub --version 2>&1 | sed -r 's/secrethub version v([^,]*).*/\1/') = "$VERSION" ]; then
-            curl -sSfL https://github.com/secrethub/secrethub-cli/releases/download/v$VERSION/secrethub-v$VERSION-$PLATFORM-amd64.tar.gz | $SUDO tar zxf - -C /usr
+          mkdir secrethub
+          curl -sSfL https://github.com/secrethub/secrethub-cli/releases/download/v$VERSION/secrethub-v$VERSION-$PLATFORM-amd64.tar.gz | $SUDO tar zxf - -C ./secrethub && mv ./secrethub/bin/secrethub << install-path >>
+          rm -rf ./secrethub
         fi
