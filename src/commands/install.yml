@@ -51,6 +51,6 @@ steps:
 
           # Add executable to path if it is not there already.
           if ! echo ":$PATH:" | grep -q  ":<<parameters.install-path>>:"; then
-            echo `export PATH="$PATH:<<parameters.install-path>>"` >> $BASH_ENV;
+            echo 'export PATH="$PATH:<<parameters.install-path>>"' >> $BASH_ENV;
           fi
         fi
