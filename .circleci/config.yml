@@ -48,6 +48,18 @@ jobs:
       - checkout
       - test-s/install
 
+  integration-test-node-cci:
+    executor: orb-tools/node-cci
+    steps:
+      - checkout
+      - test-s/install
+
+  integration-test-oracle:
+    executor: orb-tools/oracle
+    steps:
+      - checkout
+      - test-s/install
+
   integration-test-macos:
     executor: orb-tools/macos
     steps:
@@ -100,7 +112,9 @@ workflows:
       - integration-test-alpine
       - integration-test-machine
       - integration-test-node
+      - integration-test-node-cci
       - integration-test-macos
+      - integration-test-oracle
 
       # publish a semver version of the orb. relies on
       # the commit subject containing the text "[semver:patch|minor|major|skip]"
@@ -119,7 +133,9 @@ workflows:
             - integration-test-alpine
             - integration-test-machine
             - integration-test-node
+            - integration-test-node-cci
             - integration-test-macos
+            - integration-test-oracle
           filters:
             branches:
               only: master
