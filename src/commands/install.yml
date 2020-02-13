@@ -18,12 +18,12 @@ steps:
         if [ "$EUID" == "0" ]; then export SUDO=""; else export SUDO="sudo"; fi
 
         # If the version is not explicitly specified then use the existing one if possible.
-        if [ <<parameters.version>> == "latest" ]  && command -v secrethub >/dev/null 2>&1; then
+        if [ "<< parameters.version >>" == "latest" ]  && command -v secrethub >/dev/null 2>&1; then
             exit 0
         fi
 
         # Get the latest version.
-        VERSION=<<parameters.version>>
+        VERSION="<< parameters.version >>"
         if [ "$VERSION" == "latest" ]; then
             VERSION=$(curl --silent --show-error --location --fail --retry 3 \
             https://api.github.com/repos/secrethub/secrethub-cli/releases/latest | grep tag_name | sed -r 's/"tag_name": "v([^ ]+)".*/\1/' | tr -d " " )
