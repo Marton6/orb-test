@@ -132,6 +132,8 @@ workflows:
       - integration-test-node-cci
       - integration-test-macos
       - integration-test-oracle
+      - integration-test-ubuntu-custom-path
+      - integration-test-ubuntu-specific-version
 
       # publish a semver version of the orb. relies on
       # the commit subject containing the text "[semver:patch|minor|major|skip]"
@@ -153,6 +155,9 @@ workflows:
             - integration-test-node-cci
             - integration-test-macos
             - integration-test-oracle
+            - integration-test-ubuntu-custom-path
+            - integration-test-ubuntu-specific-version
+            
           filters:
             branches:
               only: master
