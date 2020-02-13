@@ -34,10 +34,10 @@ jobs:
     executor: orb-tools/ubuntu
     steps:
       - checkout
-      - mkdir ~/test
+      - run: mkdir ~/test
       - test-s/install:
           install-path: "~/test"
-      - secrethub --version
+      - run: secrethub --version
 
   integration-test-ubuntu-specific-version:
     executor: orb-tools/ubuntu
@@ -45,7 +45,7 @@ jobs:
       - checkout
       - test-s/install:
           version: 0.32.0
-      - secrethub --version
+      - run: secrethub --version
 
   integration-test-alpine:
     executor: orb-tools/alpine
