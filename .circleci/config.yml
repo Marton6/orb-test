@@ -29,6 +29,7 @@ jobs:
     steps:
       - checkout
       - test-s/install
+      - run: secrethub --version
 
   integration-test-ubuntu-custom-path:
     executor: orb-tools/ubuntu
