@@ -127,14 +127,14 @@ workflows:
 
       # an example job
       - integration-test-ubuntu
-      #- integration-test-alpine
-      #- integration-test-machine
-      #- integration-test-node
-      #- integration-test-node-cci
-      #- integration-test-macos
-      #- integration-test-oracle
-      #- integration-test-ubuntu-custom-path
-      #- integration-test-ubuntu-specific-version
+      - integration-test-alpine
+      - integration-test-machine
+      - integration-test-node
+      - integration-test-node-cci
+      - integration-test-macos
+      - integration-test-oracle
+      - integration-test-ubuntu-custom-path
+      - integration-test-ubuntu-specific-version
 
       # publish a semver version of the orb. relies on
       # the commit subject containing the text "[semver:patch|minor|major|skip]"
@@ -150,14 +150,14 @@ workflows:
           publish-version-tag: false
           requires:
             - integration-test-ubuntu
-            #- integration-test-alpine
-            #- integration-test-machine
-            #- integration-test-node
-            #- integration-test-node-cci
-            #- integration-test-macos
-            #- integration-test-oracle
-            #- integration-test-ubuntu-custom-path
-            #- integration-test-ubuntu-specific-version
+            - integration-test-alpine
+            - integration-test-machine
+            - integration-test-node
+            - integration-test-node-cci
+            - integration-test-macos
+            - integration-test-oracle
+            - integration-test-ubuntu-custom-path
+            - integration-test-ubuntu-specific-version
 
           filters:
             branches:
