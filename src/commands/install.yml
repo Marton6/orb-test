@@ -44,7 +44,7 @@ steps:
           curl -sSfL https://github.com/secrethub/secrethub-cli/releases/download/v$VERSION/secrethub-v$VERSION-$PLATFORM-amd64.tar.gz | tar zxf - -C ./secrethub
 
           # check if we can install the CLI without sudo
-          if ! mv ./secrethub/bin/secrethub << parameters.install-path >> ; then
+          if ! mv ./secrethub/bin/secrethub << parameters.install-path >> 2>/dev/null ; then
             sudo mv ./secrethub/bin/secrethub << parameters.install-path >>
           fi
           rm -rf ./secrethub
